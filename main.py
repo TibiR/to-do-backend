@@ -24,7 +24,9 @@ def add():
 	todos = mongo.db.todos
 	data = request.json
 	todos.insert(data)
-	return Response(str('complete'), status=200, mimetype='application/json');
+	response = Response('complete', status=200, mimetype="application/json")
+	response.headers['Location'] = '/add'
+	return response
 
 # FIND-ONE
 @app.route('/find-one/<jobname>', methods=['GET'])
